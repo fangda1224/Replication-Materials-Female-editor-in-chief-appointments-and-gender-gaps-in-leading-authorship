@@ -2,7 +2,9 @@
 The project examines gender gaps in scientific authorship following female editor-in-chief appointments using large-scale bibliometric data. The analysis focuses on first and last corresponding authorship and gender representation in novel research, with comparisons across disciplines, journals, institutions, and countries.
 
 
-This package contains the processed data and the code needed to reproduce the analyses in the paper. It is organised as follows:
+This package contains the code needed to reproduce the analyses in the paper. The processed data are archived separately on figshare: https://doi.org/10.6084/m9.figshare.35048644
+
+Download the data files from figshare and place them in the `data/` folder before running the code. The package is organised as follows once the data are in place:
 
 ```
 20261118-Materials/
@@ -36,6 +38,8 @@ This package contains the processed data and the code needed to reproduce the an
 
 ### Processed data (`data/`)
 
+**Download:** (https://doi.org/10.6084/m9.figshare.35048644)
+
 The two `.dta` files are the processed, analysis-ready datasets. Each row is one paper. The two files differ only in how the *leading author* is defined:
 
 | File | Leading author |
@@ -43,7 +47,6 @@ The two `.dta` files are the processed, analysis-ready datasets. Each row is one
 | `1-first-0.7CI-withnovelty.dta` | First author |
 | `1-last-0.7CI-withnovelty.dta`  | Last author |
 
-`0.7CI` refers to the confidence threshold used when inferring author gender. Only authors whose gender was inferred with confidence ≥ 0.7 are kept. `withnovelty` means the paper-level novelty score has been merged in. The analysis code keeps publication years up to 2022.
 
 The raw bibliographic data used to build these files are not redistributed. The notebooks in `code/data_pipeline/` show how the processed files were built. They are included for transparency only and cannot be run without the raw data.
 
@@ -70,7 +73,7 @@ The raw bibliographic data used to build these files are not redistributed. The 
 
 ### External data (public)
 
-`02_heterogeneity.do` also uses two public World Bank files, placed in `data/`:
+`02_heterogeneity.do` also uses two public World Bank files. Copies are included in the figshare record; place them in `data/` together with the `.dta` files:
 
 | File | Source |
 |---|---|
@@ -92,9 +95,10 @@ ssc install did_multiplegt_dyn
 
 ## How to reproduce the results
 
-1. Open `code/analysis/00_master.do`. Set `global root` to the full path of this folder (`20261118-Materials`).
-2. Run `00_master.do` in Stata. It runs steps 01–04a twice: once with `author = first` and once with `author = last`.
-3. Open `code/analysis/04b_novelty_gbdt_3step.ipynb` in Jupyter. Its working directory must be `code/analysis/`. Run it with `AUTHOR = 'first'`, then change the value to `'last'` and run it again.
+1. Download the data from figshare ([FIGSHARE DOI LINK]) and put all files in the `data/` folder.
+2. Open `code/analysis/00_master.do`. Set `global root` to the full path of this folder (`20261118-Materials`).
+3. Run `00_master.do` in Stata. It runs steps 01–04a twice: once with `author = first` and once with `author = last`.
+4. Open `code/analysis/04b_novelty_gbdt_3step.ipynb` in Jupyter. Its working directory must be `code/analysis/`. Run it with `AUTHOR = 'first'`, then change the value to `'last'` and run it again.
 
 You can also run each Stata script on its own. Set `global root` and `global author` first; the scripts default to `first`.
 
@@ -117,3 +121,4 @@ A journal is treated from the first year in which it has a female editor-in-chie
 
 - The GBDT step uses a fixed `random_state = 42`. Results may still differ slightly across scikit-learn versions.
 - Outputs from `did_multiplegt_dyn` are saved as Stata graph files (`.gph`). The point estimates are printed in the Stata log.
+
