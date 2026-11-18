@@ -1,0 +1,2 @@
+# Replication-Materials-Female-editor-in-chief-appointments-and-gender-gaps-in-leading-authorship
+The project examines gender gaps in scientific authorship following female editor-in-chief appointments using large-scale bibliometric data. The analysis focuses on first and last corresponding authorship and gender representation in novel research, with comparisons across disciplines, journals, institutions, and countries.
